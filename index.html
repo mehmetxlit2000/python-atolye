@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <script>try{var s=JSON.parse(localStorage.getItem("pysinav_set")||"{}");document.documentElement.dataset.theme=s.dark===true?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Python Sınav Antrenörü</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -187,11 +187,125 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}button[hidd
 .gapb b{font-size:20px}.gapb p{color:var(--ink);margin:8px 0 0;font-weight:500}
 .fin{text-align:center;padding:14px 0}.fin .ft{font:800 34px var(--sans);color:var(--mut)}.fin.win .ft{color:var(--ok)}.fin.lose .ft{color:var(--bad)}
 .fin .fs{font:800 54px var(--mono);margin:6px 0}
+/* ===== KARANLIK MOD ===== */
+[data-theme="dark"]{color-scheme:dark;
+    --bg:#14100f;--card:#1e1817;--ink:#f3e9e6;--mut:#a89592;--line:#33292a;--soft:#251d1d;--soft2:#2f2424;
+    --acc:#ef6471;--acc2:#f58d5f;--accs:rgba(239,100,113,.14);--acct:#ff8a94;
+    --ok:#3ecf94;--okb:rgba(62,207,148,.13);--bad:#ff6b7d;--badb:rgba(255,107,125,.14);--warn:#f5a04a;
+    --ed:#191413;--edh:#241c1b;--edl:#352a29;--edt:#f1e6e3;--ek:#ff7aa2;--es:#5fd39b;--ec:#8f7c7a;--eb:#6ea8ff;--en:#f5a04a;--edn:#5a4a49;
+    --sh:0 1px 2px rgba(0,0,0,.4),0 18px 40px -24px rgba(0,0,0,.7)}
+[data-theme="dark"] .opt:not(.ok):not(.no){background:var(--soft)}
+[data-theme="dark"] .opt:not(.ok):not(.no):hover:not(:disabled){background:var(--soft2)}
+[data-theme="dark"] input,[data-theme="dark"] .up{background:var(--soft)}
+[data-theme="dark"] .pav{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--acc)}
+[data-theme="dark"] .pav.g{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--line)}
+[data-theme="dark"] .pav .cam{border-color:var(--card)}
+[data-theme="dark"] .lr.p1{background:linear-gradient(120deg,#4b3a10,#6a5018)}
+[data-theme="dark"] .lr.p2{background:linear-gradient(120deg,#2e3338,#444c55)}
+[data-theme="dark"] .lr.p3{background:linear-gradient(120deg,#4a2e1a,#6a4128)}
+[data-theme="dark"] .lr.p1 small,[data-theme="dark"] .lr.p2 small,[data-theme="dark"] .lr.p3 small{color:#d9c9b0}
+.card,.st,.rank,.prog,nav,.ed,.lr,input{transition:background-color .3s,border-color .3s,color .3s}
+
+/* ===== AYAR PANELİ ===== */
+.gear{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:35;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--acct);display:grid;place-items:center;cursor:pointer;box-shadow:var(--sh);transition:transform .25s}
+.gear:hover{transform:rotate(30deg) scale(1.07)}
+.setp{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:36;width:min(300px,calc(100vw - 32px));background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;box-shadow:0 20px 50px -12px rgba(0,0,0,.35);animation:rev .2s ease}
+.setp h3{margin:0 0 6px;font-size:15px}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:14px;font-weight:600;cursor:pointer}
+.setp h3+.srow{border-top:0}
+.setp input.sw{appearance:none;-webkit-appearance:none;flex:none;width:46px;height:26px;padding:0;border:0;border-radius:99px;background:var(--line);position:relative;cursor:pointer;transition:background .2s}
+.setp input.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
+.setp input.sw:checked{background:linear-gradient(140deg,var(--acc),var(--acc2))}
+.setp input.sw:checked::after{transform:translateX(20px)}
+.setp input[type=range]{flex:1;padding:0;border:0;height:24px;background:none;accent-color:var(--acc)}
+.setp input[type=range]:disabled{opacity:.35}
+
+/* ===== ANİMASYONLAR ===== */
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@keyframes cntpop{0%{transform:scale(2.2);opacity:0}25%{transform:scale(1);opacity:1}85%{opacity:1}100%{transform:scale(.85);opacity:.4}}
+@keyframes xpf{0%{transform:translate(-50%,0);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-80px);opacity:0}}
+#card h2,#card .ed,#card .opt{animation:rev .35s ease both}
+#card .opt.ok{animation:pop .45s ease}
+#card .opt.no,.fb.no{animation:shake .4s ease}
+.btn:active,.alt:active{transform:scale(.96)}
+.opt:active:not(:disabled){transform:scale(.98)}
+.cnt3{animation:cntpop .9s ease}
+.xpf{position:fixed;left:50%;top:38%;z-index:70;pointer-events:none;font:800 28px var(--sans);color:var(--ok);text-shadow:0 2px 12px rgba(0,0,0,.25);animation:xpf 1.1s ease-out forwards}
+body.noanim *:not(i),body.noanim *:not(i)::before,body.noanim *:not(i)::after{animation:none!important;transition:none!important}
+body.noanim .cele i,body.noanim .live i{animation:none!important}
+.opr{color:#0f8a8a;font-weight:700}
+[data-theme="dark"] .opr{color:#4fd1d1}
+.tbtn{right:calc(max(16px,env(safe-area-inset-right,0px)) + var(--o))}
+.tbtn:hover{transform:scale(1.07)}
+/* ===== HEADER: rütbe solda, profil sağda ===== */
+header{gap:14px 16px}
+header .rank{order:1;flex:1 1 280px;max-width:340px;min-width:0}
+header .me{order:2;flex:1 1 auto;justify-content:flex-end;min-width:0}
+header h1{order:3;flex:1 0 100%}
+.me .hint{flex:1 0 100%;text-align:right}
+
+/* ===== RANGE (kaydırıcı) TASARIMI ===== */
+input[type=range]{-webkit-appearance:none;appearance:none;--p:0%;height:24px;padding:0;border:0;border-radius:0;background:transparent;cursor:pointer;box-shadow:none}
+input[type=range]:focus{box-shadow:none;outline:none}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--acc),var(--acc2)) left/var(--p) 100% no-repeat,var(--soft2)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;box-sizing:border-box;width:22px;height:22px;margin-top:-7px;border-radius:50%;background:var(--card);border:3px solid var(--acc);box-shadow:0 3px 10px -2px rgba(224,80,92,.55);transition:transform .15s}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--soft2)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+input[type=range]::-moz-range-thumb{box-sizing:border-box;width:22px;height:22px;border-radius:50%;background:var(--card);border:3px solid var(--acc);box-shadow:0 3px 10px -2px rgba(224,80,92,.55)}
+input[type=range]:hover::-webkit-slider-thumb,input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px var(--accs)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px var(--accs)}
+
+/* ===== VS ekranı: küçük ekranda üstten taşmasın ===== */
+body{min-height:100dvh}
+.wrap{padding-bottom:96px}
+.vs,.gate{display:flex;padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px))}
+.vs>.vsc,.gate>form,.gate>.pmc{margin:auto}
+
+/* ===== MOBİL ===== */
+@media(max-width:560px){
+    .wrap{padding:14px 12px 96px}
+    header .rank{flex:1 1 100%;max-width:none}
+    header .me{flex:1 1 100%;justify-content:space-between}
+    header .me .pin{flex:1}
+    h1{font-size:19px}.logo{width:40px;height:40px}
+    .st{padding:10px 11px;gap:9px}.st b{font-size:18px}.st .ic{width:30px;height:30px}
+    h2{font-size:18px}
+    pre{font-size:13px;padding:12px 14px}.ln{margin-right:12px}
+    .opt{padding:12px 14px;font-size:14.5px}
+    .inp{flex-direction:column}.inp .btn{width:100%}
+    .prog{padding:16px}
+    .lr,.lb .lr,.lr.p1,.lr.p2,.lr.p3{grid-template-columns:26px 34px 1fr auto;gap:8px;padding:8px}
+    .lr.act{grid-template-columns:10px 34px 1fr auto}
+    .lr>svg,.lr>.exw{display:none}
+    .inv{padding:12px}
+    /* VS */
+    .vsc.card{padding:14px;border-radius:20px}
+    .vh2{gap:6px;margin-bottom:12px}
+    .pl{gap:6px}.pl .av{width:30px;height:30px;font-size:13px}
+    .pl b{font-size:13px}.pl small{display:none}
+    .scr{font-size:22px}.vsx{font-size:16px}
+    .vs h2{font-size:17px}
+    .vs .opt{padding:11px 12px;font-size:14px}
+    .cnt3{font-size:68px;padding:24px 0 6px}
+    .fin .ft{font-size:28px}.fin .fs{font-size:44px}
+    .gapb{padding:16px}
+    .gear{width:44px;height:44px}
+    .tbtn{right:calc(max(16px,env(safe-area-inset-right,0px)) + var(--o)*.9)}
+}
+.stats>*{min-width:0}
+.st>div:last-child{min-width:0}
+header>*{min-width:0}
+/* Kod yazısında ligatür kapalı: >= <= == != ayrı görünsün */
+pre,pre *,code,input,.mt,.ln{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 </style></head>
 <body><div class="wrap">
-<header><h1><span class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M13.5 5l-3 14"/></svg></span><span>Python Sınav Antrenörü<small>Çöz, rütbe kazan</small></span></h1>
-<div class="me" id="me"></div>
-<div class="rank" id="rank"></div></header>
+    <header>
+        <div class="rank" id="rank"></div>
+        <div class="me" id="me"></div>
+        <h1><span class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M13.5 5l-3 14"/></svg></span><span>Python Sınav Antrenörü<small>Çöz, rütbe kazan</small></span></h1>
+    </header>
 <section class="stats" id="stats"></section>
 <nav id="tabs"></nav>
 <main class="card" id="card"></main>
@@ -199,6 +313,16 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}button[hidd
 <section class="prog" id="act"></section>
 <section class="prog" id="prog"></section>
 <p class="foot"><button class="ghost" id="rst">İlerlemeyi sıfırla</button></p>
+</div>
+<button class="gear" id="gear" aria-label="Ayarlar" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
+<button class="gear tbtn" id="tSound" style="--o:58px" aria-label="Sesi aç/kapat"></button>
+<button class="gear tbtn" id="tDark" style="--o:116px" aria-label="Karanlık modu aç/kapat"></button>
+<div class="setp" id="setp" hidden role="dialog" aria-label="Ayarlar">
+    <h3>Ayarlar</h3>
+    <label class="srow"><span>Ses efektleri</span><input type="checkbox" class="sw" id="sSound"></label>
+    <div class="srow"><span>Ses seviyesi</span><input type="range" id="sVol" min="0" max="100" step="5"></div>
+    <label class="srow"><span>Karanlık mod</span><input type="checkbox" class="sw" id="sDark"></label>
+    <label class="srow"><span>Animasyonlar</span><input type="checkbox" class="sw" id="sAnim"></label>
 </div>
 <div class="gate" id="gate" hidden role="dialog" aria-modal="true" aria-labelledby="gt"><form class="card" id="gf">
 <h2 id="gt">Adınla giriş yap</h2>
@@ -216,8 +340,7 @@ const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=r(0,i);[a[i],a[
 const fl=x=>Number.isInteger(x)?x+".0":String(x),md=(a,b)=>((a%b)+b)%b,fd=(a,b)=>Math.floor(a/b);
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const norm=s=>String(s).toLowerCase().replace(/["']/g,"").replace(/[\s,]+/g," ").trim();
-const hl=l=>{let o="",i=0;l.replace(/"[^"]*"|#.*|\.[a-z_]+(?=\()|\b(?:if|elif|else|for|while|in|and|or|not|break|continue|def|return)\b|\b(?:print|input|len|sum|range|int|float|str|max|min|round|type|sorted|end|sep|reverse)\b|\b(?:True|False)\b|\b\d+(?:\.\d+)?\b/g,(m,p)=>{const c=m[0]=='"'?"s":m[0]=="#"?"c":m[0]=="."?"b":/\d|T|F/.test(m[0])&&/^(\d|True|False)/.test(m)?"n":/^(print|input|len|sum|range|int|float|str|max|min|round|type|sorted|end|sep|reverse)$/.test(m)?"b":"k";o+=esc(l.slice(i,p))+`<span class="${c}">${esc(m)}</span>`;i=p+m.length;return m});return o+esc(l.slice(i))};
-const cb=c=>c.split("\n").map((l,i)=>`<span class="ln">${i+1}</span>${hl(l)}`).join("\n");
+const hl=l=>{let o="",i=0;l.replace(/"[^"]*"|#.*|\.[a-z_]+(?=\()|\b(?:if|elif|else|for|while|in|and|or|not|break|continue|def|return)\b|\b(?:print|input|len|sum|range|int|float|str|max|min|round|type|sorted|end|sep|reverse)\b|\b(?:True|False)\b|\b\d+(?:\.\d+)?\b|\/\/=?|\*\*=?|[=!<>+\-*\/%]=|[<>+\-*\/%=]/g,(m,p)=>{const c=m[0]=='"'?"s":m[0]=="#"?"c":m[0]=="."?"b":/^[<>=!+\-*\/%]/.test(m)?"opr":/^(\d|True|False)/.test(m)?"n":/^(print|input|len|sum|range|int|float|str|max|min|round|type|sorted|end|sep|reverse)$/.test(m)?"b":"k";o+=esc(l.slice(i,p))+`<span class="${c}">${esc(m)}</span>`;i=p+m.length;return m});return o+esc(l.slice(i))};const cb=c=>c.split("\n").map((l,i)=>`<span class="ln">${i+1}</span>${hl(l)}`).join("\n");
 
 /* ---------- ÇIKTI SORULARI ---------- */
 const OUT=[
@@ -259,7 +382,23 @@ const LOUT=[
 ()=>{const t=pick([100,250,600]),u=YN(),k=YN(),A=t>=500||u&&t>=200,B=!A&&k&&!u,o=A?t:B?t+10:t+30;return{code:`tutar = ${t}\nuye = ${TF(u)}\nkupon = ${TF(k)}\nif tutar >= 500 or uye and tutar >= 200:\n    kargo = 0\nelif kupon and not uye:\n    kargo = 10\nelse:\n    kargo = 30\nprint(tutar + kargo)`,ans:String(o),exp:`İlk koşul: ${TF(t>=500)} or (${TF(u)} and ${TF(t>=200)}) = ${TF(A)}.${A?" kargo = 0.":` elif: ${TF(k)} and ${TF(!u)} = ${TF(B)}. kargo = ${B?10:30}.`}`}},
 ()=>{const a=r(1,9),b=r(1,9),c=r(1,9),x=a>b||b>c,y=!(a>c)&&c>3;return{code:`a = ${a}\nb = ${b}\nc = ${c}\nx = a > b or b > c\ny = not a > c and c > 3\nprint(x, y)\nprint(x and not y)`,ans:`${TF(x)} ${TF(y)} ${TF(x&&!y)}`,exp:`x = ${TF(a>b)} or ${TF(b>c)}. y = (not ${TF(a>c)}) and ${TF(c>3)}. Son satır: ${TF(x)} and ${TF(!y)}.`}},
 ()=>{const l=Array.from({length:4},()=>[pick([15000,25000,40000]),YN()]),n=l.filter(([g,k])=>g>=30000||g>=20000&&k).length;return{code:`gelirler = [${l.map(x=>x[0]).join(", ")}]\nkefiller = [${l.map(x=>TF(x[1])).join(", ")}]\nonay = 0\nfor i in range(4):\n    if gelirler[i] >= 30000 or (gelirler[i] >= 20000 and kefiller[i]):\n        onay += 1\nprint(onay)`,ans:String(n),exp:`Her başvuru ayrı denenir: gelir 30000 ve üstüyse ya da (20000 ve üstü ve kefil varsa) sayılır. Toplam ${n}.`}}];
+/* ---------- HAVA DURUMU / DEVAMSIZLIK (and / or / not) ---------- */
+const WOUT=[
+    ()=>{const t=pick([-3,5,14,22,31,36]),y=YN(),o=y?"semsiye al":t>=30?"sapka tak":t<=5?"mont gir":"tisort yeter";return{code:`sicaklik = ${t}\nyagmur = ${TF(y)}\nif yagmur:\n    print("semsiye al")\nelif sicaklik >= 30:\n    print("sapka tak")\nelif sicaklik <= 5:\n    print("mont gir")\nelse:\n    print("tisort yeter")`,ans:o,exp:`yagmur = ${TF(y)}.${y?" İlk koşul doğru, gerisine bakılmaz.":` Sıra sıcaklığa geçer: sicaklik = ${t}.`}`}},
+    ()=>{const t=pick([18,24,27,33]),y=YN(),ok=t>=25&&!y;return{code:`sicaklik = ${t}\nyagmur = ${TF(y)}\nif sicaklik >= 25 and not yagmur:\n    print("denize git")\nelse:\n    print("evde kal")`,ans:ok?"denize git":"evde kal",exp:`sicaklik >= 25 → ${TF(t>=25)}, not yagmur → ${TF(!y)}. and için ikisi de True olmalı.`}},
+    ()=>{const d=pick([2,6,11,14]),p=pick([35,50,65,80]),k=d>10||p<50;return{code:`devamsizlik = ${d}\npuan = ${p}\nif devamsizlik > 10 or puan < 50:\n    print("Kaldi")\nelse:\n    print("Gecti")`,ans:k?"Kaldi":"Gecti",exp:`or: biri doğruysa yeter. devamsizlik > 10 → ${TF(d>10)}, puan < 50 → ${TF(p<50)}.`}},
+    ()=>{const t=pick([-5,10,20,38]),y=YN(),o=t<0||t>35?"tehlikeli":!y?"normal":"yagmurlu";return{code:`sicaklik = ${t}\nyagmur = ${TF(y)}\nif sicaklik < 0 or sicaklik > 35:\n    print("tehlikeli")\nelif not yagmur:\n    print("normal")\nelse:\n    print("yagmurlu")`,ans:o,exp:`İlk koşul: ${TF(t<0)} or ${TF(t>35)} = ${TF(t<0||t>35)}.${t<0||t>35?"":` elif: not yagmur → ${TF(!y)}.`}`}},
+    ()=>{const v=pick([30,55]),f=pick([40,65]),d=pick([4,12]),k=d<=10&&(v>=50||f>=60);return{code:`devamsizlik = ${d}\nvize = ${v}\nfinal = ${f}\nif devamsizlik <= 10 and (vize >= 50 or final >= 60):\n    print("Gecti")\nelse:\n    print("Kaldi")`,ans:k?"Gecti":"Kaldi",exp:`Parantez içi: ${TF(v>=50)} or ${TF(f>=60)} = ${TF(v>=50||f>=60)}. devamsizlik <= 10 → ${TF(d<=10)}. İkisi and ile bağlı.`}},
+    ()=>{const t=pick([3,12,24,30]),y=YN();return{code:`sicaklik = ${t}\nyagmur = ${TF(y)}\nprint(sicaklik > 20 and not yagmur)\nprint(sicaklik < 5 or yagmur)`,ans:`${TF(t>20&&!y)} ${TF(t<5||y)}`,exp:`Satır 3: ${TF(t>20)} and ${TF(!y)}. Satır 4: ${TF(t<5)} or ${TF(y)}.`}},
+    ()=>{const l=Array.from({length:4},()=>pick([-2,8,18,27,34])),n=l.filter(s=>s>=25||s<=0).length;return{code:`sicakliklar = [${l.join(", ")}]\nsayac = 0\nfor s in sicakliklar:\n    if s >= 25 or s <= 0:\n        sayac += 1\nprint(sayac)`,ans:String(n),exp:`Her sıcaklık ayrı denenir: 25 ve üstü ya da 0 ve altı sayılır. Toplam ${n}.`}}];
+LOUT.push(...WOUT);
+const WEASY=WOUT.slice(0,3);
 
+/* ---------- VS için sadece kolay sorular ---------- */
+function vsGen(c){
+    if(c=="out")return pick([2,8,10,11,12,14,18,22,23,24].map(i=>OUT[i]).concat(WEASY));
+    if(c=="math")return pick([0,1,2,3,4,5,9,13].map(i=>MATH[i]));
+    return pick([0,1,2,3,13,16,17,24,25].map(i=>ERR[i]))}
 /* ---------- MATEMATİK SORULARI ---------- */
 const MATH=[
 ()=>{const b=r(2,9),a=r(10,99);return{code:`print(${a} // ${b})`,ans:String(fd(a,b)),exp:"// tam bölmedir, küsuratı atar."}},
@@ -342,7 +481,12 @@ const LERR=[
 ()=>({key:"orv",no:["andor","prc","eq","notx"],code:`# Amac: sadece cumartesi veya pazar ise tatil yaz\ngun = "sali"\nif gun == "cumartesi" or "pazar":\n    print("Tatil")`,exp:'"pazar" tek başına True sayılır. Doğrusu: gun == "cumartesi" or gun == "pazar".'}),
 ()=>({key:"half",no:["andor","col","prc"],code:`gelir = ${pick([25000,40000,60000])}\nif gelir > 20000 and < 50000:\n    print("Orta gelir")`,exp:"and’in iki yanı da tam ifade olmalı: gelir > 20000 and gelir < 50000."}),
 ()=>({key:"sym",no:["andor","col","notx"],code:pick([`gelir = 40000\nkefil = False\nif gelir > 30000 || kefil:\n    print("Onay")`,`yas = 25\ngelir_var = True\nif yas >= 18 && gelir_var:\n    print("Onay")`,`borc_var = False\nif !borc_var:\n    print("Onay")`]),exp:"Python’da mantık operatörleri kelimeyle yazılır: and, or, not."})];
-
+LERR.push(
+    ()=>({key:"andor",no:["prc","notx"],code:`# Amac: sicaklik 0 dan kucuk VEYA 35 ten buyukse uyar\nsicaklik = ${pick([-4,40])}\nif sicaklik < 0 and sicaklik > 35:\n    print("Uyari")`,exp:"Bir sayı hem 0'dan küçük hem 35'ten büyük olamaz. İki yoldan biri yeterli, or gerekir."}),
+    ()=>({key:"notx",no:["andor","prc"],code:`# Amac: yagmur YOKSA disari cik\nyagmur = False\nif yagmur:\n    print("Disari cik")`,exp:"Koşul ters: if not yagmur: yazılmalı."}),
+    ()=>({key:"ord",no:["andor","notx","prc"],code:`# Amac: devamsizligi 10 dan fazla olan kalsin\ndevamsizlik = ${r(11,15)}\npuan = 80\nif puan >= 50:\n    print("Gecti")\nelif devamsizlik > 10:\n    print("Kaldi")`,exp:"puan >= 50 doğru olunca elif'e sıra gelmez. Devamsızlık kontrolü önce yazılmalı."}),
+    ()=>({key:"orv",no:["andor","prc","eq","notx"],code:`# Amac: sicaklik 5 veya 10 ise uyar\nsicaklik = ${pick([7,20])}\nif sicaklik == 5 or 10:\n    print("Uyari")`,exp:"10 tek başına True sayılır. Doğrusu: sicaklik == 5 or sicaklik == 10."})
+);
 /* ---------- METOTLAR ---------- */
 const MET=[
 ['Temel','print()','Ekrana yazdırır. Virgülle ayrılan değerlerin arasına boşluk koyar, sonda alt satıra geçer. end= sonu, sep= ayracı değiştirir.','print("a", 5)       # a 5\nprint("x", end="")   # alt satıra geçmez'],
@@ -386,7 +530,7 @@ out:svg('<path d="M4 17l6-6-6-6M12 19h8"/>',15),math:svg('<path d="M5 12h14M12 5
 const RK=["Çaylak","Acemi","Kodcu","Algoritmacı","Usta","Uzman","Mimar","Efsane","Exterminator"];
 const EX=8,TH=[0,100,200,300,400,500,650,820,1150];
 function rk(S_=S){const S=S_,t=S.ok+S.no,acc=t?S.ok/t:0;let i=0;while(i<EX&&S.xp>=TH[i+1])i++;const gated=i==EX&&acc<.8&&!S.ex;if(gated)i=EX-1;return{i,gated,acc}}
-function badge(i,w=42){if(i==EX)return exBadge(w);const t=i>=4,n=i%4+1,y0=t?19:13,sp=t?5:5.5;let ch="";
+function badge(i,w=42){if(i==EX)return exBadge(w);const u=++ux,t=i>=4,n=i%4+1,y0=t?19:13,sp=t?5:5.5;let ch="";
  for(let k=0;k<n;k++){const y=y0+k*sp;ch+=`<path d="M14 ${y}l6 4.5 6-4.5" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>`}
  const star=t?`<path d="M20 7.5l1.4 2.9 3.1.4-2.3 2.2.6 3.1-2.8-1.5-2.8 1.5.6-3.1-2.3-2.2 3.1-.4z" fill="#fff"/>`:"";
  return `<svg width="${w}" height="${w*1.1}" viewBox="0 0 40 44"><defs><linearGradient id="bg${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${t?"#d6344f":"#ee6a5a"}"/><stop offset="1" stop-color="${t?"#f0793f":"#f59a5b"}"/></linearGradient></defs><path d="M20 2L36 8v14c0 11-7 17-16 20C11 39 4 33 4 22V8z" fill="url(#bg${i})"/>${star}${ch}</svg>`}
@@ -422,7 +566,7 @@ const TABS=[["mix","Karışık"],["out","Çıktı"],["math","Matematik"],["err",
 let mode="mix",cur=null,seen=[],mi=0,mr=false,hist={},hp={};
 const editor=(code,name="kod.py")=>`<div class="ed"><div class="edh"><i></i><i></i><i></i><span>${name}</span></div><pre>${cb(code)}</pre></div>`;
 
-function mk(c){const a=(c=="out"?pick(r(0,2)?OUT:LOUT):c=="math"?pick(MATH):pick(r(0,2)?ERR:LERR))();a.c=c;a.st={done:false};
+function mk(c,easy){const a=(easy?vsGen(c):c=="out"?pick(r(0,2)?OUT:LOUT):c=="math"?pick(MATH):pick(r(0,2)?ERR:LERR))();a.c=c;a.st={done:false};
  if(c=="err"){a.ans=E[a.key];a.opts=shuf([a.ans,...shuf(Object.keys(E).filter(k=>k!=a.key&&!(a.no||[]).includes(k))).slice(0,3).map(k=>E[k])]);a.q="Bu kodda ne sorun var?"}
  else a.q=c=="out"?"Bu kod çalışınca ekrana ne yazılır?":"Bu işlemin sonucu nedir?";return a}
 const H=()=>hist[mode]||(hist[mode]=[]);
@@ -597,7 +741,7 @@ function renderAct(){const el=$("#act");if(!el)return;const now=Date.now(),L=act
 const adv=(d,i)=>i+1>=d.qs.length?{status:"done",cur:i+1}:{cur:i+1};
 const pk=u=>({uid:u.uid||u.id,name:u.name,photo:u.photo||"",xp:Number(u.xp)||0,ok:Number(u.ok)||0,no:Number(u.no)||0,ex:!!u.ex});
 async function challenge(u){if(!u)return;if(!me)return openGate("VS için önce giriş yap.");if(ar||inv||wt)return say("Zaten bir düellodasın.");
- const qs=shuf(["out","math","err","out","err"]).map(c=>{const q=mk(c);return{c:q.c,q:q.q,code:q.code,ans:q.ans,exp:q.exp||"",opts:q.opts||null}}),id=Date.now().toString(36)+r(100,999),A1=pk({...profile,uid:me.uid,xp:S.xp,ok:S.ok,no:S.no,ex:S.ex}),B1=pk(u);
+ const qs=shuf(["out","math","out","math","err"]).map(c=>{const q=mk(c,true);return{c:q.c,q:q.q,code:q.code,ans:q.ans,exp:q.exp||"",opts:q.opts||null}}),id=Date.now().toString(36)+r(100,999),A1=pk({...profile,uid:me.uid,xp:S.xp,ok:S.ok,no:S.no,ex:S.ex}),B1=pk(u);
  try{await F.setDoc(F.doc(db,"duels",id),{players:[A1.uid,B1.uid],a:A1,b:B1,status:"pending",created:Date.now(),qs,cur:0,sc:{[A1.uid]:0,[B1.uid]:0},res:{}})}catch(e){return say(aErr(e))}
  const o=document.createElement("div");o.className="inv card";o.innerHTML=`${avatar(B1)}<div><b>${esc(B1.name)}</b> kabul ediyor mu?<small>Davet gönderildi · <span id="wc">10</span> sn</small></div><button class="ghost" id="wx">İptal</button><div class="tb"><i style="animation-duration:10s"></i></div>`;document.body.appendChild(o);
  let n=10;wt={id,name:B1.name,o,t:setInterval(()=>{n--;const c=$("#wc");if(c)c.textContent=n;if(n<=0)endWait("expired")},1000)};$("#wx").onclick=()=>endWait("cancelled")}
@@ -658,4 +802,109 @@ async function initCloud(){header();$("#lbp").innerHTML=`<h3>Sıralama · ilk 10
  catch(e){$("#lbp").innerHTML=`<h3>Sıralama · ilk 10</h3><p class="hint">Sunucuya bağlanılamadı. İnterneti kontrol edip sayfayı yenile.</p>`;say("Sunucuya bağlanılamadı. Misafir olarak devam edebilirsin.")}}
 
 stats();newQ();initCloud();
+/* ===== AYARLAR + SES ===== */
+const SET={sound:true,vol:.6,anim:true,dark:false};
+try{Object.assign(SET,JSON.parse(localStorage.getItem("pysinav_set")||"{}"))}catch(e){}
+const saveSet=()=>{try{localStorage.setItem("pysinav_set",JSON.stringify(SET))}catch(e){}};
+
+let AC=null;
+function tone(f,t=0,d=.12,type="sine",v=.25,f2){
+    if(!SET.sound)return;
+    if(!AC){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;AC=new C()}
+    if(AC.state==="suspended")AC.resume();
+    const o=AC.createOscillator(),g=AC.createGain(),s=AC.currentTime+t;
+    o.type=type;o.frequency.setValueAtTime(f,s);
+    if(f2)o.frequency.exponentialRampToValueAtTime(f2,s+d);
+    g.gain.setValueAtTime(.0001,s);
+    g.gain.exponentialRampToValueAtTime(Math.max(v*SET.vol,.0002),s+.01);
+    g.gain.exponentialRampToValueAtTime(.0001,s+d);
+    o.connect(g);g.connect(AC.destination);o.start(s);o.stop(s+d+.02)}
+
+const SND={
+    click:()=>tone(520,0,.05,"triangle",.18),
+    tab:()=>tone(660,0,.06,"triangle",.18),
+    ok:(n=0)=>{const b=523*Math.pow(2,Math.min(n,7)/12);tone(b,0,.12,"sine",.3);tone(b*1.25,.09,.12,"sine",.3);tone(b*1.5,.18,.2,"sine",.3)},
+    no:()=>{tone(220,0,.18,"sawtooth",.2,150);tone(160,.14,.25,"sawtooth",.2,100)},
+    up:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.22,"square",.2)),
+    fan:()=>{[392,494,587,784].forEach((f,i)=>tone(f,i*.13,.3,"triangle",.3));[784,988,1175,1568].forEach((f,i)=>tone(f,.6+i*.11,.4,"sine",.28))},
+    tick:n=>tone(n===1?880:660,0,.14,"sine",.35),
+    go:()=>{tone(988,0,.1,"square",.2);tone(1319,.1,.3,"square",.2)},
+    win:()=>SND.fan(),
+    lose:()=>[330,277,233,196].forEach((f,i)=>tone(f,i*.16,.28,"triangle",.28)),
+    inv:()=>{tone(784,0,.12,"sine",.3);tone(988,.14,.12,"sine",.3);tone(784,.4,.12,"sine",.3);tone(988,.54,.16,"sine",.3)}
+};
+const snd=(k,...a)=>{try{SND[k](...a)}catch(e){}};
+
+function floatXP(t){if(!SET.anim)return;const d=document.createElement("div");d.className="xpf";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1200)}
+
+/* Tüm butonlara tık sesi (şık butonlarına değil, onlar doğru/yanlış sesi çalar) */
+document.addEventListener("click",e=>{
+    const b=e.target.closest&&e.target.closest("button");
+    if(!b||b.disabled||b.classList.contains("opt")||b.id==="chk")return;
+    snd(b.closest("nav")?"tab":"click")},true);
+
+/* Doğru / yanlış / rütbe sesi */
+const _check=check;
+check=function(v){
+    const q=cur,was=q&&q.st&&q.st.done;
+    _check(v);
+    if(!q||was||!q.st.done)return;
+    if(q.st.ok){snd("ok",S.streak);floatXP("+"+q.st.xp+" XP");if(q.st.up&&!document.querySelector(".cele"))setTimeout(()=>snd("up"),350)}
+    else snd("no")};
+
+/* Exterminator kutlaması */
+const _cel=celebrate;
+celebrate=function(){const had=document.querySelector(".cele");_cel();if(!had)snd("fan")};
+
+/* VS düellosu: geri sayım, tur sonucu, final, davet sesleri */
+new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){
+    if(n.nodeType!==1)continue;
+    const q=s=>n.matches(s)?n:n.querySelector(s);let e;
+    if(e=q(".cnt3"))snd("tick",+e.textContent);
+    else if(q(".gapb.ok"))snd("ok",3);
+    else if(q(".gapb.no"))snd("no");
+    else if(q(".fin.win"))snd("win");
+    else if(q(".fin.lose"))snd("lose");
+    else if((e=q(".inv"))&&e.textContent.includes("çağırdı"))snd("inv");
+    else if((q(".opt")||q("#vin"))&&n.closest&&n.closest(".vs")&&ar&&ar.qi===0&&!ar.goSnd){ar.goSnd=1;snd("go")}
+}}).observe(document.body,{childList:true,subtree:true});
+
+/* Ayar paneli */
+const gear=$("#gear"),sp=$("#setp");
+const setOpen=o=>{sp.hidden=!o;gear.setAttribute("aria-expanded",o)};
+function applySet(){
+    const dark=SET.dark===true;
+    document.documentElement.dataset.theme=dark?"dark":"light";
+    document.body.classList.toggle("noanim",!SET.anim);
+    $("#sSound").checked=SET.sound;$("#sVol").value=Math.round(SET.vol*100);$("#sVol").disabled=!SET.sound;
+    $("#sDark").checked=dark;$("#sAnim").checked=SET.anim;paintTools()}
+gear.onclick=()=>setOpen(sp.hidden);
+document.addEventListener("click",e=>{if(!sp.hidden&&!sp.contains(e.target)&&!gear.contains(e.target))setOpen(false)});
+sp.addEventListener("keydown",e=>{e.stopPropagation();if(e.key==="Escape"){setOpen(false);gear.focus()}});
+$("#sSound").onchange=e=>{SET.sound=e.target.checked;saveSet();applySet();if(SET.sound)snd("click")};
+$("#sVol").oninput=e=>{SET.vol=e.target.value/100;saveSet()};
+$("#sVol").onchange=()=>snd("click");
+$("#sDark").onchange=e=>{SET.dark=e.target.checked;saveSet();applySet();snd("tab")};
+$("#sAnim").onchange=e=>{SET.anim=e.target.checked;saveSet();applySet()};
+/* Hızlı butonlar: ses + karanlık mod */
+const TI={
+    sun:svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',22),
+    moon:svg('<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>',22),
+    vol:svg('<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/>',22),
+    mute:svg('<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/>',22)};
+function paintTools(){
+    const dark=SET.dark===true;
+    $("#tDark").innerHTML=dark?TI.sun:TI.moon;
+    $("#tDark").title=dark?"Aydınlık moda geç":"Karanlık moda geç";
+    $("#tDark").setAttribute("aria-pressed",dark);
+    $("#tSound").innerHTML=SET.sound?TI.vol:TI.mute;
+    $("#tSound").title=SET.sound?"Sesi kapat":"Sesi aç";
+    $("#tSound").setAttribute("aria-pressed",SET.sound)}
+$("#tDark").onclick=()=>{SET.dark=!(SET.dark===true);saveSet();applySet()};
+$("#tSound").onclick=()=>{SET.sound=!SET.sound;saveSet();applySet();if(SET.sound)snd("click")};
+applySet();
+/* Range doluluk çubuğu */
+function fillRange(el){const mn=+el.min||0,mx=+el.max||100;el.style.setProperty("--p",((el.value-mn)/(mx-mn)*100)+"%")}
+document.addEventListener("input",e=>{if(e.target.type==="range")fillRange(e.target)});
+document.querySelectorAll("input[type=range]").forEach(fillRange);
 </script></body></html>
